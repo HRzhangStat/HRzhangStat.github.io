@@ -142,38 +142,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="神经网络相关题目"><a href="#神经网络相关题目" class="headerlink" title="神经网络相关题目"></a>神经网络相关题目</h1><p><img src="/BP%E7%BD%91%E7%BB%9C.jpg" alt="BP网络及算法中的变量符号"></p>
-<ol>
-<li>$ D &#x3D; {(x_1, y_1), (x_2, y_2), \ldots, (x_m, y_m)} $：训练集，包含 $ m $ 个样例。</li>
-<li>$ x_i \in \mathbb{R}^d $：输入示例的特征向量，具有 $ d $ 个属性。</li>
-<li>$ y_i \in \mathbb{R}^l $：输出示例的目标向量，具有 $ l $ 个属性。</li>
-<li>$ \theta_j $：输出层第 $ j $ 个神经元的阈值。</li>
-<li>$ \gamma_h $：隐层第 $ h $ 个神经元的阈值。</li>
-<li>$ v_{ih} $：输入层第 $ i $ 个神经元与隐层第 $ h $ 个神经元之间的连接权值。</li>
-<li>$ w_{hj} $：隐层第 $ h $ 个神经元与输出层第 $ j $ 个神经元之间的连接权值。</li>
-<li>$ \alpha_h &#x3D; \sum_{i&#x3D;1}^d v_{ih} x_i $：隐层第 $ h $ 个神经元接收到的输入。</li>
-<li>$ \beta_j &#x3D; \sum_{h&#x3D;1}^q w_{hj} b_h $：输出层第 $ j $ 个神经元接收到的输入，其中 $ b_h $ 是隐层第 $ h $ 个神经元的输出。</li>
-<li>$ \sigma(x) &#x3D; \frac{1}{1 + e^{-x}} $：Sigmoid 激活函数，用于将输入值映射到 (0, 1) 范围, 隐层和输出层的激活函数相同</li>
-<li>$ \hat{\mathbf{y}}_k &#x3D; (\hat{y}_1^k, \hat{y}_2^k, \dots, \hat{y}_l^k) $：神经网络在第 $ k $ 个训练样例上的输出向量。</li>
-<li>$ \hat{y}_j^k &#x3D; f(\beta_j - \theta_j) $：输出层第 $ j $ 个神经元的输出值，其中 $ f $ 是激活函数。</li>
-<li>$ E_k &#x3D; \frac{1}{2} \sum_{j&#x3D;1}^l (\hat{y}_j^k - y_j^k)^2 $：神经网络在第 $ k $ 个训练样例上的均方误差（MSE）。</li>
-</ol>
-<h3 id="Q1：对于图中的-w-hj-，给定学习率-eta-试推导出BP算法中的更新公式-w-hj-w-hj-Delta-w-hj"><a href="#Q1：对于图中的-w-hj-，给定学习率-eta-试推导出BP算法中的更新公式-w-hj-w-hj-Delta-w-hj" class="headerlink" title="Q1：对于图中的 $ w_{hj} $，给定学习率$\eta$,试推导出BP算法中的更新公式, $ w_{hj} &#x3D;  w_{hj} + \Delta w_{hj}$"></a>Q1：对于图中的 $ w_{hj} $，给定学习率$\eta$,试推导出BP算法中的更新公式, $ w_{hj} &#x3D;  w_{hj} + \Delta w_{hj}$</h3><p>(提示：$\sigma’(x) &#x3D; \sigma(x)(1 - \sigma(x))$)</p>
-<h3 id="A1"><a href="#A1" class="headerlink" title="A1:"></a>A1:</h3><p>$$<br>\Delta w_{hj} &#x3D; -\eta \frac{\partial E_k}{\partial w_{hj}} &#x3D; &#x3D;  -\eta \frac{\partial E_k}{\partial \hat{y}_j^k} \frac{\partial \hat{y}<em>j^k}{\partial \beta_j} \frac{\partial \beta_j}{\partial w</em>{hj}}<br>$$</p>
-<p>由于$ \beta_j &#x3D; \sum_{h&#x3D;1}^q w_{hj} b_h $，所以 $ \frac{\partial \beta_j}{\partial w_{hj}} &#x3D;  b_h$<br>由于$ \hat{y}_j^k &#x3D; f(\beta_j - \theta_j) $ 所以 $ \frac{\partial \hat{y}_j^k}{\partial \beta_j} &#x3D; \hat{y}_j^k(1-\hat{y}<em>j^k)$<br>由于$ E_k &#x3D; \frac{1}{2} \sum</em>{j&#x3D;1}^l (\hat{y}_j^k - y_j^k)^2 $所以 $ \frac{\partial E_k}{\partial \hat{y}_j^k} &#x3D; \hat{y}_j^k - y_j^k $,<br>从而</p>
-<p>$$<br>\Delta w_{hj} &#x3D; -\eta \frac{\partial E_k}{\partial w_{hj}} &#x3D; &#x3D;  -\eta \frac{\partial E_k}{\partial \hat{y}_j^k} \frac{\partial \hat{y}<em>j^k}{\partial \beta_j} \frac{\partial \beta_j}{\partial w</em>{hj}} &#x3D; -\eta (\hat{y}_j^k - y_j^k)(\hat{y}_j^k(1-\hat{y}_j^k))b_h<br>$$</p>
-<p>更新公式为： $ w_{hj} &#x3D;  w_{hj} + \Delta w_{hj} $</p>
-<h3 id="Q2：对于图中的-v-ih-，试推导出BP算法中的更新公式-v-ih-v-ih-Delta-v-ih"><a href="#Q2：对于图中的-v-ih-，试推导出BP算法中的更新公式-v-ih-v-ih-Delta-v-ih" class="headerlink" title="Q2：对于图中的 $ v_{ih} $，试推导出BP算法中的更新公式, $ v_{ih} &#x3D; v_{ih} + \Delta v_{ih} $"></a>Q2：对于图中的 $ v_{ih} $，试推导出BP算法中的更新公式, $ v_{ih} &#x3D; v_{ih} + \Delta v_{ih} $</h3><h3 id="A2"><a href="#A2" class="headerlink" title="A2:"></a>A2:</h3><p>$$<br>\Delta v_{ih} &#x3D; -\eta \frac{\partial E_k}{\partial v_{ih}} &#x3D; -\eta \frac{\partial E_k}{\partial b_h} \frac{\partial b_h}{\partial v_{ih}}<br>$$</p>
-<p>$$<br>\frac{\partial E_k}{\partial b_h} &#x3D; \sum_{j&#x3D;1}^l\frac{\partial E_k}{\partial \beta_j} \frac{\partial \beta_j}{\partial b_h}<br>$$</p>
-<p>其中</p>
-<p>$\frac{\partial E_k}{\partial \beta_j} &#x3D; (\hat{y}_j^k - y_j^k)(\hat{y}_j^k(1-\hat{y}_j^k))$</p>
-<p>由于</p>
-<p>$$<br>b_h &#x3D; f(\alpha_h - \gamma_h)<br>$$</p>
-<p>所以</p>
-<p>$$<br>\frac{\partial b_h}{\partial v_{ih}} &#x3D; (b_h)(1-b_h)x_i<br>$$</p>
-<p>从而</p>
-<p>$$<br>\Delta v_{ih} &#x3D; -\eta [\sum_{j&#x3D;1}^l (\hat{y}_j^k - y_j^k)(\hat{y}_j^k(1-\hat{y}<em>j^k))w</em>{hj}]b_h(1-b_h)x_i<br>$$</p>
-
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1>
       
     </div>
     <footer class="article-footer">
